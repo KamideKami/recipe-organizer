@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gemini AI Chatbot</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; }
+        #chatbox { width: 90%; max-width: 400px; height: 400px; border: 1px solid #ccc; padding: 10px; overflow-y: scroll; margin: auto; text-align: left; }
+        #userInput { width: 70%; padding: 5px; }
+        button { padding: 5px; cursor: pointer; }
+    </style>
+</head>
+<body>
+
+    <h2>Gemini AI Chatbot</h2>
+    <div id="chatbox"></div>
+    <input type="text" id="userInput" placeholder="Type your message...">
+    <button onclick="sendMessage()">Send</button>
+
+    <script>
+        const API_KEY = "AIzaSyAHAApi3ZZUUPhWWbuzBY_EOQTzjpKGj8w"; // Your Gemini API Key
+        const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${API_KEY}`;
+
+        function sendMessage() {
+            const inputField = document.getElementById("userInput");
+            const chatbox = document.getElementById("chatbox");
+            const userMessage = inputField.value;
+
+            if (!userMessage.trim()) return;
+
+            chatbox.innerHTML += `<p><strong>You:</strong> ${userMessage}</p>`;
+            inputField.value = "";
+
+            fetch(API_URL, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    contents: [{
+                        parts: [{ text: userMessage }]
+                    }]
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                const botResponse = data.candidates?.[0]?.content?.parts?.[0]?.text || "Sorry, I couldn't understand that.";
+                chatbox.innerHTML += `<p><strong>Bot:</strong> ${botResponse}</p>`;
+                chatbox.scrollTop = chatbox.scrollHeight;
+            })
+            .catch(error => {
+                chatbox.innerHTML += `<p><strong>Bot:</strong> Error: Unable to fetch response.</p>`;
+                console.error(error);
+            });
+        }
+    </script>
+
+</body>
+</html>
