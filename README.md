@@ -16,3 +16,7 @@ A web app to organize and store recipes, integrated with Firebase for persistenc
 3. Add your OpenAI API key in `chatbot.js`
 4. Open `index.html` in the browser
 
+## Setup
+1. Live Site Link: `git clone https://kamidekami.github.io/recipe-organizer/`
+
+
