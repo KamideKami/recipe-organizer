@@ -1,0 +1,43 @@
+body {
+    background-color: #f8f9fa;
+    font-family: 'Arial', sans-serif;
+}
+.navbar {
+    padding: 15px;
+}
+.container {
+    max-width: 900px;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+h2, h4 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+.table {
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+}
+.btn-primary, .btn-secondary {
+    width: 100%;
+    font-weight: bold;
+}
+.form-label {
+    font-weight: 600;
+}
+@media (max-width: 768px) {
+    .table-responsive {
+        overflow-x: auto;
+    }
+    .navbar-brand {
+        font-size: 1.2rem;
+    }
+    .btn {
+        font-size: 0.9rem;
+        padding: 10px;
+    }
+}
