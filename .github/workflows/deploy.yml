@@ -3,11 +3,15 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches:
-      - main  # This will deploy on every push to the 'main' branch
+      - main  # Deploy when pushing to the 'main' branch
 
 jobs:
   deploy:
-    runs-on: ubuntu-latest  # Use the latest version of Ubuntu for the job
+    runs-on: ubuntu-latest  # Use the latest Ubuntu runner
+
+    permissions:
+      contents: write  # Allow the workflow to write to the repository
+      pages: write     # Allow the workflow to push to the gh-pages branch
 
     steps:
       - name: Checkout code
@@ -17,4 +21,4 @@ jobs:
         uses: peaceiris/actions-gh-pages@v3  # GitHub Pages deployment action
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}  # Use GitHub's token for authentication
-          publish_dir: ./  # Publish from the root directory (where your HTML, CSS, JS files are)
+          publish_dir: ./  # Path to the folder you want to deploy (root in your case)
